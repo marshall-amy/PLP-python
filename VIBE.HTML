@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini e-learning platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Mini E-Learning Platform</h1>
+    <div class="course list">
+        <h2>Available Courses</h2>
+        <div class="course" onclick="showDetails(0)">HTML Basics</div>
+        <div class="course" onclick="showDetails(1)">Python for Beginners</div>
+        <div class="course" onclick="showDetails(2)">Database Design</div>
+    </div>
+    <div class="course details" id="courseDetails" style="display:none;">
+        <h2 id="course Title"></h2>
+        <p id="courseDescription"></p>
+        <button id="completeBtn" onclick="markCompleted()">Mark as Completed</button>
+        <p id="status"></p>
+    </div>
+    <script>
+        const courses=[
+            {
+                title:"HTML Basics",
+                description:"Learn the building blocks of web development with HTML.",
+                completed:false
+            },
+            {
+                title:"Python for Beginners",
+                description:"Start programming with python,a beginner-friendly language",
+                completed:false
+            },
+            {
+                title:"Database Design",
+                description:"Understand database concepts,normalization, and ERDs",
+                completed:false
+            }
+        ];
+        let currentCourseIndex=null;
+
+        function showDetails(index){
+            currentCourseIndex=index;
+            const course=courses[index];
+            document.getElementById("course Title").innerText=course.title;
+            document.getElementById("courseDescription").innerText=course.description;
+            document.getElementById("courseDetails").style.display="block";
+
+            if(course.completed){
+                document.getElementById("status").innerText="Status Completed";
+                document.getElementById("status").classList.add("completed");
+                document.getElementById("completedBtn").disabled=true;
+            }else{
+                document.getElementById("status").innerText="Status:In Progress";
+                document.getElementById("status").classList.remove("completed");
+                document.getElementById("completeBtn").disabled=false;
+            }
+             }
+
+             function markCompleted(){
+                if(currentCourseIndex!==null){
+                    courses[currentCourseIndex].completed=true;
+                    showDetails(currentCourseIndex);
+                }
+             }
+    </script>
+</body>
+</html>
