@@ -1,0 +1,39 @@
+1.	Explain how AI driven code generation tools reduce development time. What are their limitations?
+Answer: AI driven tools use machine learning models trained on vast amounts of source code to suggest code snippers, complete functions, and detect syntax errors. They reduce development time by:
+a)	Autocompleting repetitive code patterns quickly.
+b)	Providing real-time code suggestions and documentation hints.
+c)	Reducing debugging time through syntax and logic corrections.
+Limitations:
+a)	May produce inaccurate or insecure code.
+b)	Lack full understanding of project context.
+c)	Can lead to developer overreliance on AI-generated code.
+d)	Ethical and licensing issues due to training data sources.
+
+2.	Compare supervised and unsupervised learning in the context of automated bug detection.
+Answer:
+Aspect	Supervised Learning
+Definition	Model trained on labeled data
+Use in Bug Detention	Detects known types of bugs using pre-labeled datasets
+Example	Classifying code commits as “buggy” or “clean”.
+Limitation	Needs large labeled datasets
+
+3.	Why is bias mitigation critical when using AI for user experience personalization?
+	Prevents discrimination in personalized recommendations or content.
+	Ensures user-trust and satisfaction.
+	Reduces ethical and legal risks. Without bias control, AI may reinforce stereotypes, exclude user groups, or make unfair decisions based on incomplete or skewed data. 
+
+4.	How does AIOps improve software deployment efficiency? Provide 2 examples
+Answer: AIOps uses machine learning and analytics to automate and enhance DevOps processes. It improves efficiency:
+a)	Predictive Monitoring:
+•	AI models analyze logs and metrics to predict failures before they happens, reducing downtime. Example: Detecting memory leaks or CPU spikes before deployment crashes occur.
+b)	Automated Incident Resolution:
+•	AI tolls can auto-remediate common issues without human intervention. Example: Automatically rolling back a faulty release when error rates increase.
+
+HOW AI IMPROVES TEST COVERAGE
+AI-based tools like testim.io automatically identify UI changes, generate test cases from user behaviour and predict high-risk test areas. Unlike manual testing,AI can maintain scripts when the interface changes reducing maintenance time. It also increases test coverage by exploring edge cases human testers may miss. Additionally, AI learns from past test runs, improving failure prediction and prioritizing critical test paths. Overall, AI driven testing enhances speed,accuracy and reliability in software validation
+
+AI-POWERED CODE COMPLETION
+Both implementations achieve the same goal sorting a list of dictionaries by a specific key but differ slightly in robustness and readabilty. The manual implementation is concise, easy to understand and performs well for clean datasets where every dictionary contains the target key. its efficient with atime of complexity of O(n log n)since it relies on Python's built-in sorted()function.However it may raise a keyerror if the key is missing in any dictionary. The AI-generated version on the other hand add type hints amd uses the .get()method with a default value.This makes the code more robust and safer for real world data, where some entries may not contain the key.The use of type hints also improves readability and integration with modern IDEs or static analysis tools. In terms of performance, both versions are pratically identical. The AI-generated code,however, show slightly more proffesional and production and production-ready approach due to improved error handling and documentation.Therefore, the AI-suggetsed version is more efficient in terms of readabilty, maintainability and reliabilty even though both perform equally in runtime effiiciency
+
+PRATICAL IMPLEMENTATION
+Both manually and written and AI-generated functions accomplish the same objective sorting a list of dictionaries by a given key.The manual implementation is straightforward,readable and efficient for well-structured data.It uses python's built-in sorted()function, which has a time complexity in the list is missing the target key, it may raise a KeyError. The AI-suggested version, on the other hand,includes enhancements such as type hints and the .get()method,which safely handles missing keys by providing a default value.These improvements increase the function's robustness and make it more adaptable for real-world datasets.The inclusion of type hints also improves clarity,doumentation and compatibility with modern development tools. While both functions perform equally in terms of computational efficiency,the AI-generated version demonstrates better maintainability,readability and error handling.Therefore, the AI-assisted code is considered more efficient overall for proffessional or production environments.
