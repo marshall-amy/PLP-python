@@ -1,0 +1,99 @@
+Q1: Edge AI – Reducing Latency and Enhancing Privacy
+
+Explanation:
+Edge AI refers to running AI models directly on local devices (smartphones, drones, IoT devices) rather than relying on cloud servers. By processing data locally:
+
+Reduced Latency:
+
+Data does not need to travel to remote servers, so decisions happen in real time.
+
+Example: An autonomous drone detecting obstacles can respond immediately without waiting for cloud inference.
+
+Enhanced Privacy:
+
+Sensitive data remains on-device, minimizing exposure to network interception or cloud storage vulnerabilities.
+
+Example: A wearable health monitor analyzes heart rate anomalies locally, ensuring personal data isn’t uploaded to the cloud unnecessarily.
+
+Real-World Example:
+
+Autonomous Drones: Drones performing package delivery or surveillance can detect obstacles and navigate safely using onboard Edge AI, ensuring quick reactions and data privacy.
+
+Q2: Quantum AI vs Classical AI in Optimization
+
+Classical AI:
+
+Relies on conventional computing and algorithms like gradient descent, genetic algorithms, or simulated annealing.
+
+Handles large optimization problems but may require exponential time for very complex tasks with many variables.
+
+Quantum AI:
+
+Uses quantum computing principles (superposition, entanglement) to explore multiple solutions simultaneously.
+
+Can solve certain combinatorial and optimization problems exponentially faster than classical methods.
+
+Industries Benefiting Most:
+
+Finance: Portfolio optimization, risk assessment, fraud detection.
+
+Logistics: Route optimization for delivery networks or supply chains.
+
+Healthcare: Drug discovery, protein folding, personalized treatment plans.
+
+Energy: Optimizing power grid management and renewable energy distribution.
+
+Part 2: Practical Implementation
+Task 1: Edge AI Prototype
+
+Objective: Train a lightweight image classifier for recyclable items, deploy using TensorFlow Lite.
+
+Steps:
+
+Data Preparation:
+
+Collect small dataset of recyclable items (plastic, paper, metal).
+
+Resize images to uniform dimensions (e.g., 128x128).
+
+Test Edge Deployment:
+
+Deploy .tflite model on Raspberry Pi or Android device.
+
+Run inference locally on sample images and record accuracy metrics.
+
+Benefits for Real-Time Applications:
+
+Immediate predictions (no network delays).
+
+Can run in remote areas without reliable internet.
+
+Protects sensitive camera feeds by processing locally.
+
+Task 2: AI-Driven IoT Concept – Smart Agriculture
+
+Scenario: Predict crop yields using sensors and AI.
+
+Sensors Needed:
+
+Soil moisture sensor
+
+Temperature sensor
+
+Humidity sensor
+
+Light intensity sensor
+
+pH sensor
+
+AI Model Proposal:
+
+Model Type: Gradient Boosting (XGBoost) or Random Forest
+
+Purpose: Predict expected yield based on environmental conditions and historical data.
+
+Explanation:
+
+Sensors continuously collect environmental data.
+
+The AI model analyzes trends and predicts yields, helping farmers optimize irrigation, fertilizer, and harvesting schedules.

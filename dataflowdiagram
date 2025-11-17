@@ -1,0 +1,16 @@
+Sensors (soil, temp, humidity, pH, light)
+            │
+            ▼
+   Data Acquisition Module (IoT Hub)
+            │
+            ▼
+      Preprocessing (missing values, normalization)
+            │
+            ▼
+       AI Model Prediction
+            │
+            ▼
+   Output: Predicted Crop Yield & Recommendations
+            │
+            ▼
+     Farmer Dashboard / Alerts
