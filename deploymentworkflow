@@ -1,0 +1,251 @@
+1. Problem Definition (6 points)
+
+Hypothetical AI Problem: Predicting student dropout rates.
+
+Objectives (3):
+
+Identify at-risk students early in the semester.
+
+Improve student retention through targeted interventions.
+
+Provide administrators with actionable insights to allocate support resources.
+
+Stakeholders (2):
+
+University administrators
+
+Students and academic advisors
+
+KPI (1):
+
+Dropout prediction accuracy at Week 4 (percentage of correctly identified at-risk students early in the term).
+
+2. Data Collection & Preprocessing (8 points)
+
+Data Sources (2):
+
+Student academic records (grades, attendance)
+
+Learning management system (LMS) activity logs
+
+Potential Bias (1):
+
+Students with limited internet or device access may appear “less engaged,” leading to biased risk predictions against low-income groups.
+
+Preprocessing Steps (3):
+
+Handle missing values (imputation for attendance gaps).
+
+Normalize continuous features (e.g., assignment submission counts).
+
+Encode categorical variables (major, year level).
+
+3. Model Development (8 points)
+
+Model Choice & Justification:
+
+Random Forest because it handles nonlinear relationships, is robust to noise, and works well with mixed data types.
+
+Data Splitting:
+
+70% training, 15% validation, 15% test to balance learning with hyperparameter tuning and final evaluation.
+
+Hyperparameters to Tune (2):
+
+Number of trees (n_estimators) — controls model complexity and variance.
+
+Maximum depth — prevents overfitting by limiting tree growth.
+
+4. Evaluation & Deployment (8 points)
+
+Evaluation Metrics (2):
+
+F1-score — balances precision and recall for imbalanced dropout datasets.
+
+ROC-AUC — measures ranking ability independent of threshold.
+
+Concept Drift:
+
+Drift occurs when the statistical properties of input data change over time (e.g., new online course formats).
+
+Monitoring: Track model performance metrics weekly and use drift-detection tools (e.g., ADWIN).
+
+Technical Challenge:
+
+Scalability: Serving predictions in real-time for thousands of students may require distributed computing or optimized APIs.
+
+Part 2: Case Study Application (40 points)
+Problem Scope (5 points)
+
+Problem: Predict patient readmission risk within 30 days after discharge.
+
+Objectives:
+
+Identify high-risk patients.
+
+Reduce readmission rates and improve care quality.
+
+Assist clinicians in planning follow-up care.
+
+Stakeholders:
+
+Clinicians, hospital administrators, patients.
+
+Data Strategy (10 points)
+Data Sources:
+
+Electronic Health Records (EHRs): diagnoses, vitals, medications.
+
+Demographic data: age, sex, socioeconomic status.
+
+Past hospitalization history.
+
+Ethical Concerns (2):
+
+Patient privacy: Sensitive health data must be protected.
+
+Bias: Models may underpredict for underrepresented groups.
+
+Preprocessing & Feature Engineering Pipeline:
+
+Handle missing vitals with median imputation.
+
+Standardize continuous features (e.g., blood pressure).
+
+One-hot encode diagnoses/procedures.
+
+Create derived features such as length of stay, number of prior admissions, medication count.
+
+Model Development (10 points)
+Model Choice:
+
+Gradient Boosting (e.g., XGBoost) because it performs well on structured medical data and handles nonlinear interactions.
+
+Hypothetical Confusion Matrix (on test set):
+	Predicted Readmit	Predicted No Readmit
+Actual Readmit	40	10
+Actual No Readmit	20	80
+
+Precision:
+
+Precision
+=
+𝑇
+𝑃
+𝑇
+𝑃
++
+𝐹
+𝑃
+=
+40
+40
++
+20
+=
+0.67
+Precision=
+TP+FP
+TP
+	​
+
+=
+40+20
+40
+	​
+
+=0.67
+
+Recall:
+
+Recall
+=
+𝑇
+𝑃
+𝑇
+𝑃
++
+𝐹
+𝑁
+=
+40
+40
++
+10
+=
+0.80
+Recall=
+TP+FN
+TP
+	​
+
+=
+40+10
+40
+	​
+
+=0.80
+Deployment (10 points)
+Integration Steps:
+
+Containerize model (Docker).
+
+Build API service to serve predictions to EHR systems.
+
+Implement batch or real-time prediction pipelines.
+
+Provide clinician-facing UI dashboards for explanations and alerts.
+
+Monitor performance and data drift.
+
+Regulatory Compliance (HIPAA):
+
+Use encryption for data transfer/storage.
+
+Restrict access using role-based permissions.
+
+Maintain audit logs and perform regular compliance checks.
+
+Ensure no protected health information (PHI) leaves secure environments.
+
+Optimization (5 points)
+
+Address Overfitting:
+
+Apply regularization (L1/L2 or tree depth control) to reduce model complexity.
+
+Part 3: Critical Thinking (20 points)
+Ethics & Bias (10 points)
+
+Impact of Biased Data:
+
+If certain patient groups (e.g., minorities or low-income patients) have historically different readmission patterns due to external factors, the model may unfairly assign them high-risk scores, leading to unequal treatment or over-monitoring.
+
+Mitigation Strategy:
+
+Use fairness-aware training, such as reweighting underrepresented groups or auditing model outputs by demographic subgroup.
+
+Trade-offs (10 points)
+
+Interpretability vs Accuracy:
+
+Highly interpretable models (e.g., logistic regression) are easier for clinicians to trust but may fail to capture complex patterns.
+
+More accurate models (e.g., XGBoost, deep learning) can improve predictions but obscure decision logic, reducing clinical transparency.
+
+Limited Computational Resources:
+
+The hospital may opt for lighter models (logistic regression, small random forests) rather than compute-heavy deep learning, trading slight accuracy for efficiency and reliability.
+
+Part 4: Reflection & Workflow Diagram (10 points)
+Reflection (5 points)
+
+Most challenging part:
+
+Designing an unbiased data pipeline because healthcare data is messy and ethically sensitive.
+
+Improvements with More Time/Resources:
+
+Collect more granular patient data (e.g., social determinants of health).
+
+Conduct broader fairness audits and clinical validation trials.
