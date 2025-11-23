@@ -1,0 +1,151 @@
+from aif360.datasets import CompasDataset
+from aif360.metrics import BinaryLabelDatasetMetric, ClassificationMetric
+from aif360.algorithms.preprocessing import Reweighing
+import matplotlib.pyplot as plt
+
+# Load dataset
+dataset = CompasDataset()
+
+# Split by protected attribute (race)
+privileged = [{'race': 1}]   # Caucasian
+unprivileged = [{'race': 0}] # African-American
+
+# Compute initial metrics
+metric = BinaryLabelDatasetMetric(dataset, privileged_groups=privileged, unprivileged_groups=unprivileged)
+
+print("Mean difference:", metric.mean_difference())
+print("Disparate impact:", metric.disparate_impact())
+
+# Apply reweighing to reduce bias
+RW = Reweighing(unprivileged_groups=unprivileged,
+                privileged_groups=privileged)
+dataset_transformed = RW.fit_transform(dataset)
+
+metric_rw = BinaryLabelDatasetMetric(dataset_transformed, privileged, unprivileged)
+print("After Reweighing - Disparate impact:", metric_rw.disparate_impact())
+
+# Visualization example
+plt.bar(['Before', 'After'], [metric.disparate_impact(), metric_rw.disparate_impact()])
+plt.title('Disparate Impact Before and After Mitigation')
+plt.ylabel('Disparate Impact Ratio')
+plt.show()
+
+Part 2: Ethical Principles Matching
+Definition	Principle
+Ensuring AI does not harm individuals or society.	B) Non-maleficence
+Respecting users’ right to control their data and decisions.	C) Autonomy
+Designing AI to be environmentally friendly.	D) Sustainability
+Fair distribution of AI benefits and risks.	A) Justice
+Part 2: Case Study Analysis (40%)
+Case 1: Biased Hiring Tool
+Source of Bias
+
+Training data bias: The model was trained on Amazon’s historical resumes, which reflected a male-dominated tech workforce.
+
+Feature selection bias: The system penalized terms associated with women’s colleges or women’s activities.
+
+Lack of fairness constraints: No algorithmic safeguards were implemented to prevent gender-based discrimination.
+
+Three Fixes
+
+Rebalance training data to ensure equal representation of genders.
+
+Remove or de-weight sensitive and proxy features (e.g., women’s organizations, certain college names).
+
+Implement fairness-aware algorithms using tools like AI Fairness 360 (e.g., reweighing, adversarial debiasing).
+
+Fairness Metrics
+
+Demographic parity difference
+
+Equal opportunity difference
+
+Disparate impact ratio
+
+False positive/negative rate parity across genders
+
+Case 2: Facial Recognition in Policing
+Ethical Risks
+
+Wrongful arrests due to misidentification of minorities.
+
+Discrimination and civil rights violations, especially against marginalized communities.
+
+Privacy intrusion, as individuals are surveilled without consent.
+
+Erosion of public trust in law enforcement.
+
+Policies for Responsible Deployment
+
+Independent bias audits before use, updated regularly.
+
+Strict accuracy thresholds across demographic groups; systems failing fairness tests cannot be deployed.
+
+Human-in-the-loop verification for every match; AI cannot be sole basis for arrest.
+
+Transparent reporting on accuracy, false match rates, and system limitations.
+
+Clear consent, warrant, and usage policies defining when facial recognition is allowed.
+
+300-Word Report (Example)
+
+Report: Analysis of Racial Bias in COMPAS Risk Scores
+
+This audit evaluates racial bias in the COMPAS Recidivism Dataset using IBM’s AI Fairness 360. COMPAS is widely criticized for assigning higher risk scores to African-American defendants compared to Caucasian defendants. Using the dataset’s protected attribute “race,” we computed fairness metrics, including disparate impact and mean difference in predicted risk.
+
+Initial analysis showed notable disparities: African-American individuals exhibited higher false positive rates, meaning they were more likely to be incorrectly labeled as “high risk.” Meanwhile, Caucasian individuals had higher false negative rates, suggesting they were more often incorrectly labeled as “low risk.” The disparate impact ratio was significantly below the acceptable threshold of 0.8, confirming substantial racial bias.
+
+To address this, we applied the Reweighing algorithm, which assigns sample weights to balance the data distribution across protected groups. After mitigation, the disparate impact ratio improved, indicating fairer outcomes. However, while reweighing reduced bias in the dataset, it does not guarantee unbiased predictions for a given model. Further mitigation—such as adversarial debiasing or post-processing corrections—may be required depending on deployment context.
+
+Visualizations of false positive and false negative rate disparities before and after mitigation highlight persistent gaps even after preprocessing, demonstrating the complexity of achieving fairness in real-world systems.
+
+Overall, the audit reveals systemic racial disparities in the COMPAS risk scores and underscores the importance of continuous bias monitoring, fairness-aware modeling techniques, and transparency in criminal justice algorithms.
+
+Part 4: Ethical Reflection (5%)
+
+In future AI projects, I will integrate ethical principles from the start. I will ensure fairness by auditing datasets for representation and bias. I will incorporate transparency by documenting model design, limitations, and data sources. I will protect user autonomy and privacy through consent protocols and data minimization. I will also apply sustainability practices, such as using efficient models and monitoring computational impact. Regular ethical reviews will guide development and deployment.
+
+Bonus Task (Extra 10%)
+1-Page Ethical AI Guideline for Healthcare
+
+1. Patient Consent Protocols
+
+Obtain explicit, informed consent before using patient data.
+
+Explain how data will be stored, analyzed, and shared.
+
+Provide opt-out mechanisms without affecting care quality.
+
+2. Bias Mitigation Strategies
+
+Evaluate datasets for demographic balance (age, gender, ethnicity).
+
+Use fairness metrics (e.g., equal opportunity, disparate impact).
+
+Implement bias mitigation (reweighing, balanced sampling, adversarial debiasing).
+
+Continuously audit deployed models for drift or emerging disparities.
+
+3. Transparency Requirements
+
+Provide clear, understandable explanations for AI-assisted clinical decisions.
+
+Document model purpose, training data, limitations, and risks.
+
+Maintain logs for all AI-driven decisions for accountability.
+
+Disclose AI involvement to patients and clinicians.
+
+4. Safety & Non-Maleficence
+
+Establish performance thresholds before clinical use.
+
+Require human oversight for all high-stakes decisions.
+
+Conduct stress testing to prevent harmful recommendations.
+
+5. Data Security & Privacy
+
+Apply encryption, access controls, and anonymization.
+
+Limit data collection to clinically necessary information.
