@@ -1,0 +1,84 @@
+{
+  "name": "AutoParts AI Agent Simulation",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Trigger",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "hour": 0,
+              "minute": 30
+            }
+          ]
+        }
+      }
+    },
+
+    {
+      "id": "2",
+      "name": "Quality Inspection Agent",
+      "type": "n8n-nodes-base.function",
+      "position": [500, 100],
+      "parameters": {
+        "functionCode": "return [{\n  defectsDetected: Math.floor(Math.random()*20),\n  status: 'Inspection Completed',\n  timestamp: new Date().toISOString()\n}];"
+      }
+    },
+
+    {
+      "id": "3",
+      "name": "Predictive Maintenance Agent",
+      "type": "n8n-nodes-base.function",
+      "position": [500, 300],
+      "parameters": {
+        "functionCode": "const vibration = Math.random()*10;\nconst temperature = 60 + Math.random()*40;\nconst failureRisk = (vibration > 7 || temperature > 90) ? 'HIGH' : 'LOW';\nreturn [{ vibration, temperature, failureRisk, timestamp: new Date().toISOString() }];"
+      }
+    },
+
+    {
+      "id": "4",
+      "name": "Workforce Scheduling Agent",
+      "type": "n8n-nodes-base.function",
+      "position": [500, 500],
+      "parameters": {
+        "functionCode": "const demand = ['High', 'Medium', 'Low'][Math.floor(Math.random()*3)];\nlet workers = demand === 'High' ? 12 : demand === 'Medium' ? 8 : 5;\nreturn [{ demand, workersAllocated: workers, timestamp: new Date().toISOString() }];"
+      }
+    },
+
+    {
+      "id": "5",
+      "name": "Combine Agent Outputs",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [800, 300],
+      "parameters": {
+        "mode": "multiplex"
+      }
+    },
+
+    {
+      "id": "6",
+      "name": "Save to Database (Simulation)",
+      "type": "n8n-nodes-base.function",
+      "position": [1100, 300],
+      "parameters": {
+        "functionCode": "return items;"
+      }
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [[{ "node": "Quality Inspection Agent", "type": "main", "index": 0 },
+                { "node": "Predictive Maintenance Agent", "type": "main", "index": 0 },
+                { "node": "Workforce Scheduling Agent", "type": "main", "index": 0 }]]
+    },
+    "Quality Inspection Agent": { "main": [[{ "node": "Combine Agent Outputs", "type": "main", "index": 0 }]] },
+    "Predictive Maintenance Agent": { "main": [[{ "node": "Combine Agent Outputs", "type": "main", "index": 0 }]] },
+    "Workforce Scheduling Agent": { "main": [[{ "node": "Combine Agent Outputs", "type": "main", "index": 0 }]] },
+    "Combine Agent Outputs": { "main": [[{ "node": "Save to Database (Simulation)", "type": "main", "index": 0 }]] }
+  }
+}
